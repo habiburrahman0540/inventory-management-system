@@ -124,20 +124,25 @@ class SupplierController extends Controller
                     @unlink($oldimg);
                     $img->save();
                 }
-                
+                $supplier->name = $request->name;
+                $supplier->email = $request->email;
+                $supplier->phone = $request->phone;
+                $supplier->address = $request->address;
+                $supplier->photo =   $image_url;
+                $supplier->shopname = $request->shopname;
+                $supplier->save();
                 
         }else{
          
-            $name = $supplier->photo;
+            $supplier->name = $request->name;
+            $supplier->email = $request->email;
+            $supplier->phone = $request->phone;
+            $supplier->address = $request->address;
+            $supplier->shopname = $request->shopname;
+            $supplier->save();
     
         }
-        $supplier->name = $request->name;
-        $supplier->email = $request->email;
-        $supplier->phone = $request->phone;
-        $supplier->address = $request->address;
-        $supplier->photo =   $image_url;
-        $supplier->shopname = $request->shopname;
-        $supplier->save();
+      
     }
 
     /**

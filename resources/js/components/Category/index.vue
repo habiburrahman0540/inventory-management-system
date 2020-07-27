@@ -1,5 +1,19 @@
 <template>
     <div>
+		<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+            <ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="index.html">Home</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li><a href="#">Category list</a></li>
+			</ul>
 		<router-link to="/add-category" class="btn btn-primary" style="margin-bottom:10px;margin-top:-20px"  >Add Category</router-link>
         <div class="row-fluid sortable ui-sortable">		
 				<div class="box span12">

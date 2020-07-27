@@ -124,19 +124,23 @@ class CustomerController extends Controller
                     @unlink($oldimg);
                     $img->save();
                 }
-                
+                $customer->name = $request->name;
+                $customer->email = $request->email;
+                $customer->phone = $request->phone;
+                $customer->address = $request->address;
+                $customer->photo =   $image_url;
+                $customer->save();
                 
         }else{
          
-            $name = $customer->photo;
+            $customer->name = $request->name;
+            $customer->email = $request->email;
+            $customer->phone = $request->phone;
+            $customer->address = $request->address;
+            $customer->save();
     
         }
-        $customer->name = $request->name;
-        $customer->email = $request->email;
-        $customer->phone = $request->phone;
-        $customer->address = $request->address;
-        $customer->photo =   $image_url;
-        $customer->save();
+     
     }
 
     /**

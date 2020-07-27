@@ -1,23 +1,9 @@
 <template>
     <div>
-		<noscript>
-				<div class="alert alert-block span10">
-					<h4 class="alert-heading">Warning!</h4>
-					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
-				</div>
-			</noscript>
-            <ul class="breadcrumb">
-				<li>
-					<i class="icon-home"></i>
-					<a href="index.html">Home</a> 
-					<i class="icon-angle-right"></i>
-				</li>
-				<li><a href="#">Add Product</a></li>
-			</ul>
         <div class="row-fluid sortable ui-sortable">
 				<div class="box span12">
 					<div class="box-header" data-original-title="">
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Add Product</h2>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span>Edit Product</h2>
 						<div class="box-icon">
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -25,7 +11,7 @@
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal" @submit.prevent="productinsert" enctype="multipart/form-data">
+					<form class="form-horizontal" @submit.prevent="productdataupdate" enctype="multipart/form-data">
 						  <fieldset>						
                             	<div class="control-group">
 							  <label class="control-label" for="typeahead">Product Name :</label>
@@ -118,7 +104,7 @@
 							  <router-link to="/all-product" class="btn btn-danger">Back</router-link>
 							</div>
 						  </fieldset>
-						</form>   
+						</form>     
 
 					</div>
 				</div><!--/span-->
@@ -135,56 +121,60 @@ export default {
         },
     data(){
         return{
-            form:{
-                category_id: null,
-                product_name: null,
-                product_code: null,
-                root: null,
-                buying_price: null,
-                selling_price: null,
-                supplier_id: null,
-                buying_date: null,
-                image: null,
-                product_quantity: null,
+        form:{
+                category_id: '',
+                product_name: '',
+                product_code: '',
+                root: '',
+                buying_price: '',
+                selling_price: '',
+                supplier_id: '',
+                buying_date: '',
+                image: '',
+                product_quantity: '',
 			},
 			errors:{},
 			categories:{},
 			suppliers:{},
         }
-	},
-	methods:{
-		onFileSelected(event){
-			let file = event.target.files[0];
-			if(file.size > 1048770){
-				noty({type:'error',layout:'topRight',text:'Product image size can not more than 1 MB',timeout: 1000})
-			}else{
-				let reader = new FileReader();
-				 reader.onload = event =>{
-					 this.form.image = event.target.result
-					 console.log(event.target.result);
-					  }
-					reader.readAsDataURL(file)
-			}
-		},
-		productinsert(){
-			axios.post('/api/all-product',this.form)
-			.then((res)=>{
-				this.$router.push({name:'allproduct'})
-				noty({type:'success',layout:'topRight',text:'Product inserted Successfully.',timeout: 1000})
-			})
-			.catch(
-				error=>this.errors = error.response.data.errors
-			)
-			
-			}
-
-	},
-	created(){
+    },
+    created(){
+        let id = this.$route.params.id
+        axios.get('/api/all-product/'+id)
+        .then(({data})=>(this.form=data))
+		.catch()
 		axios.get('/api/all-category/')
 		.then(({data}) =>(this.categories = data))
 		axios.get('/api/all-supplier/')
 		.then(({data})=>(this.suppliers = data))
-	}
+    },
+	methods:{
+		onFileSelected(event){
+			let file = event.target.files[0];
+			if(file.size > 1048770){
+				noty({type:'warning',layout:'topRight',text:'File size can not be more then 1 MB.',timeout: 1000})
+			}else{
+				let reader = new FileReader();
+				 reader.onload = event =>{
+					 this.form.image = event.target.result
+					 
+					  }
+					reader.readAsDataURL(file)
+			}
+		},
+		productdataupdate(){
+			let id = this.$route.params.id
+			axios.patch('/api/all-product/'+id,this.form)
+			.then(()=>{
+				noty({type:'success',layout:'topRight',text:'Product updated Successfully.',timeout: 1000})
+				this.$router.push({name:'allproduct'})
+				
+			})
+			.catch(
+			)
+			
+			}
 
+	}
 }
 </script>

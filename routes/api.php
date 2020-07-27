@@ -23,3 +23,4 @@ Route::apiResource('/all-category','Api\CategoryController');
 Route::apiResource('/all-customer','Api\CustomerController');
 Route::apiResource('/alluser', 'UserController');
 Route::apiResource('/all-product', 'Api\ProductController');
+Route::apiResource('/all-expense', 'Api\ExpenseController');

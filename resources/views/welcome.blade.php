@@ -378,6 +378,14 @@
 							</ul>	
 						</li>
 						<li>
+							<a class="dropmenu" href="#"><i class="icon-user-md"></i><span class="hidden-tablet"> Expense</span></a>
+							<ul>
+								<li><router-link class="submenu" to="/add-expense"><i class="icon-plus-sign"></i><span class="hidden-tablet"> Add Expense</span></router-link></li>
+								<li><router-link class="submenu" to="/all-expense"><i class="icon-medkit"></i><span class="hidden-tablet"> All Expense</span></router-link></li>
+								
+							</ul>	
+						</li>
+						<li>
 							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Users</span></a>
 							<ul>
 								<li><router-link class="submenu" to="/register"><i class="icon-plus-sign"></i><span class="hidden-tablet"> Add User</span></router-link></li>
@@ -426,8 +434,8 @@
 	<footer id="footer" style="display: none;" v-show="$route.path === '/' || $route.path === 'forgetpassword' ? false : true">
 
 		<p>
-			<span style="text-align:left;float:left;font-weight:bold">&copy; <script>document.write(new Date().getFullYear())</script> <a href="https://www.fiverr.com/users/mdhabib058/manage_gigs" alt="Inventory Management System Themes" style="color: #FFFFFF;font-weight:bold">- Inventory Management System</a></span>
-			<span class="hidden-phone" style="text-align:right;float:right;font-weight:bold">Powered by : <a href="https://www.fiverr.com/users/mdhabib058/manage_gigs" alt="Inventory Management System Templates" style="color: #FFFFFF;font-weight:bold">Dev-Habib</a></span>
+			<span style="text-align:left;float:left;font-weight:bold">&copy; 2020 <a href="https://www.fiverr.com/users/mdhabib058/manage_gigs" target="_blank" alt="Inventory Management System Themes" style="color: #FFFFFF;font-weight:bold">- Inventory Management System</a></span>
+			<span class="hidden-phone" style="text-align:right;float:right;font-weight:bold">Developed by : <a href="https://www.fiverr.com/users/mdhabib058/manage_gigs" target="_blank" alt="Inventory Management System Templates" style="color: #FFFFFF;font-weight:bold">Dev-Habib</a></span>
 		</p>
 
 	</footer>
