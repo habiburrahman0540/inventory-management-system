@@ -142,7 +142,11 @@ export default {
         let id = this.$route.params.id
         axios.get('/api/all-product/'+id)
         .then(({data})=>(this.form=data))
-        .catch()
+		.catch()
+		axios.get('/api/all-category/')
+		.then(({data}) =>(this.categories = data))
+		axios.get('/api/all-supplier/')
+		.then(({data})=>(this.suppliers = data))
     },
 	methods:{
 		onFileSelected(event){
@@ -152,7 +156,7 @@ export default {
 			}else{
 				let reader = new FileReader();
 				 reader.onload = event =>{
-					 this.form.photo = event.target.result
+					 this.form.image = event.target.result
 					 
 					  }
 					reader.readAsDataURL(file)
@@ -160,19 +164,13 @@ export default {
 		},
 		productdataupdate(){
 			let id = this.$route.params.id
-			axios.patch('/api/all-employee/'+id,this.form)
+			axios.patch('/api/all-product/'+id,this.form)
 			.then(()=>{
-				noty({type:'success',layout:'topRight',text:'Successfully done.',timeout: 1000})
-				this.$router.push({name:'allemployee'})
+				noty({type:'success',layout:'topRight',text:'Product updated Successfully.',timeout: 1000})
+				this.$router.push({name:'allproduct'})
 				
 			})
 			.catch(
-				noty({
-					type:'error',
-           layout:'topRight',
-           text: 'Something is wrong !',
-           timeout: 1000,
-					})
 			)
 			
 			}

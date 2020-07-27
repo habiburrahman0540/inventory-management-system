@@ -3072,12 +3072,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.$router.push({
           name: 'allemployee'
         });
-      })["catch"](noty({
-        type: 'error',
-        layout: 'topRight',
-        text: 'Something is wrong !',
-        timeout: 1000
-      }));
+      })["catch"]();
     }
   }
 });
@@ -3594,6 +3589,14 @@ __webpack_require__.r(__webpack_exports__);
       var data = _ref.data;
       return _this.form = data;
     })["catch"]();
+    axios.get('/api/all-category/').then(function (_ref2) {
+      var data = _ref2.data;
+      return _this.categories = data;
+    });
+    axios.get('/api/all-supplier/').then(function (_ref3) {
+      var data = _ref3.data;
+      return _this.suppliers = data;
+    });
   },
   methods: {
     onFileSelected: function onFileSelected(event) {
@@ -3612,7 +3615,7 @@ __webpack_require__.r(__webpack_exports__);
         var reader = new FileReader();
 
         reader.onload = function (event) {
-          _this2.form.photo = event.target.result;
+          _this2.form.image = event.target.result;
         };
 
         reader.readAsDataURL(file);
@@ -3622,23 +3625,18 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       var id = this.$route.params.id;
-      axios.patch('/api/all-employee/' + id, this.form).then(function () {
+      axios.patch('/api/all-product/' + id, this.form).then(function () {
         noty({
           type: 'success',
           layout: 'topRight',
-          text: 'Successfully done.',
+          text: 'Product updated Successfully.',
           timeout: 1000
         });
 
         _this3.$router.push({
-          name: 'allemployee'
+          name: 'allproduct'
         });
-      })["catch"](noty({
-        type: 'error',
-        layout: 'topRight',
-        text: 'Something is wrong !',
-        timeout: 1000
-      }));
+      })["catch"]();
     }
   }
 });

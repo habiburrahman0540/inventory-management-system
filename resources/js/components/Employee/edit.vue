@@ -132,12 +132,7 @@ export default {
 				
 			})
 			.catch(
-				noty({
-					type:'error',
-           layout:'topRight',
-           text: 'Something is wrong !',
-           timeout: 1000,
-					})
+			
 			)
 			
 			}

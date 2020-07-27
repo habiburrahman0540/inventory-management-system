@@ -129,22 +129,28 @@ class EmployeeController extends Controller
                 @unlink($oldimg);
                 $img->save();
             }
-            
+                    $employee->name = $request->name;
+            $employee->email = $request->email;
+            $employee->phone = $request->phone;
+            $employee->address = $request->address;
+            $employee->salary = $request->salary;
+            $employee->photo =   $image_url;
+            $employee->nid = $request->nid;
+            $employee->joining_date = $request->joining_date;  
+            $employee->save();
             
     }else{
      
-        $name = $employee->photo;
-
+        $employee->name = $request->name;
+        $employee->email = $request->email;
+        $employee->phone = $request->phone;
+        $employee->address = $request->address;
+        $employee->salary = $request->salary;
+        $employee->nid = $request->nid;
+        $employee->joining_date = $request->joining_date;  
+        $employee->save();
     }
-    $employee->name = $request->name;
-    $employee->email = $request->email;
-    $employee->phone = $request->phone;
-    $employee->address = $request->address;
-    $employee->salary = $request->salary;
-    $employee->photo =   $image_url;
-    $employee->nid = $request->nid;
-    $employee->joining_date = $request->joining_date;  
-    $employee->save();
+    
         
     }
 
