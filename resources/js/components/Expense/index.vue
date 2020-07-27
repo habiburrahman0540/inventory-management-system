@@ -56,7 +56,7 @@
 								
 								<td class="center ">
 									
-									<router-link class="btn btn-success" :to="{name:'edit-product',params:{id:expense.id}}">
+									<router-link class="btn btn-success" :to="{name:'edit-expense',params:{id:expense.id}}">
 										<i class="halflings-icon white edit"></i>                                            
 									</router-link>
 									<a class="btn btn-danger" @click="deleteexpense(expense.id)">

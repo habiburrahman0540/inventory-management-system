@@ -59,7 +59,8 @@ class ExpenseController extends Controller
      */
     public function show($id)
     {
-        //
+        $expense = Expense::find($id);
+        return response()->json($expense);
     }
 
     /**
@@ -82,7 +83,12 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $expense =Expense::find($id);
+        $expense->expense_name = $request->expense_name;
+        $expense->details = $request->details;
+        $expense->amount = $request->amount;
+        $expense->expense_date = $request->expense_date;
+        $expense->save();
     }
 
     /**
@@ -93,6 +99,7 @@ class ExpenseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $expense = Expense::find($id);
+        $expense->delete();
     }
 }
