@@ -12,13 +12,13 @@
 					<a href="index.html">Home</a> 
 					<i class="icon-angle-right"></i>
 				</li>
-				<li><a href="#">All Product</a></li>
+				<li><a href="#">Stock</a></li>
 			</ul>
-		<router-link to="/add-product" class="btn btn-primary" style="margin-bottom:10px;margin-top:-20px"  >Add Product</router-link>
+		
         <div class="row-fluid sortable ui-sortable">		
 				<div class="box span12">
 					<div class="box-header" data-original-title="">
-						<h2><i class="halflings-icon user"></i><span class="break"></span>All Product</h2>
+						<h2><i class="halflings-icon user"></i><span class="break"></span>Stock</h2>
 						<div class="box-icon">
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -49,9 +49,9 @@
 							  <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" 
 							  aria-label="Role: activate to sort column ascending" style="width: 140px;">Buying Price</th>
 							  <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" 
-							  aria-label="Role: activate to sort column ascending" style="width: 140px;">Selling Price</th>
+							  aria-label="Role: activate to sort column ascending" style="width: 140px;">Status</th>
 							  <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" 
-							  aria-label="Role: activate to sort column ascending" style="width: 140px;">Product Quantity</th>
+							  aria-label="Role: activate to sort column ascending" style="width: 140px;">Present Stock</th>
 							  <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" 
 							  aria-label="Status: activate to sort column ascending" style="width: 149px;">Product Image</th>
 							  <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" 
@@ -65,19 +65,20 @@
 								<td class="center ">{{product.category_name}}</td>
 								<td class="center ">{{product.name}}</td>
 								<td class="center ">{{product.buying_price}}</td>
-								<td class="center ">{{product.selling_price}}</td>
+
+								<td class="center " v-if="product.product_quantity >=1"><span class="badge badge-success">Available</span></td>
+								<td class="center " v-else=""><span class="badge badge-danger priority red">Stock out</span></td>
+
 								<td class="center ">{{product.product_quantity}}</td>
 								<td class="center ">
 									<img :src="product.image" alt="" style="width:50px;height:40px;border:2px solid#4CAE4C;border-radius:50%" >
 								</td>
 								<td class="center ">
 									
-									<router-link class="btn btn-success" :to="{name:'edit-product',params:{id:product.id}}">
+									<router-link class="btn btn-success" :to="{name:'edit-stock',params:{id:product.id}}">
 										<i class="halflings-icon white edit"></i>                                            
 									</router-link>
-									<a class="btn btn-danger" @click="deleteproduct(product.id)">
-										<i class="halflings-icon white trash"></i> 
-									</a>
+									
 								</td>
 							</tr></tbody></table>
 							</div>            

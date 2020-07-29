@@ -4,6 +4,7 @@ let Register = require('./components/auth/register.vue').default;
 let Logout = require('./components/auth/Logout.vue').default;
 let ForgetPassword = require('./components/auth/ForgetPassword.vue').default;
 let Dashboard = require('./components/Dashboard.vue').default;
+let POS = require('./components/POS/pointofsale.vue').default;
  //Employee
  let Addemployee = require('./components/Employee/create.vue').default;
  let Allemployee = require('./components/Employee/index.vue').default;
@@ -24,6 +25,9 @@ let Dashboard = require('./components/Dashboard.vue').default;
  let Addproduct = require('./components/Product/create.vue').default;
  let Allproduct = require('./components/Product/index.vue').default;
  let Editproduct = require('./components/Product/edit.vue').default;
+ //stock
+ let stock = require('./components/Stock/index.vue').default;
+ let Editstock = require('./components/Stock/edit.vue').default;
  //Expense
  let Addexpense = require('./components/Expense/create.vue').default;
  let Allexpense = require('./components/Expense/index.vue').default;
@@ -37,6 +41,7 @@ export const routes = [
     { path: '/logout', component: Logout , name:'logout' },
     { path: '/forgetpassword', component: ForgetPassword , name:'forget' },
     { path: '/dashboard', component: Dashboard , name:'dashboard' },
+    { path: '/pos', component: POS , name:'pos' },
     //Employee
      { path: '/add-employee', component: Addemployee , name:'addemployee' },
      { path: '/all-employee', component: Allemployee , name:'allemployee' },
@@ -57,6 +62,10 @@ export const routes = [
        { path: '/add-product', component: Addproduct , name:'addproduct' },
        { path: '/all-product', component: Allproduct , name:'allproduct' },
        { path: '/edit-product/:id', component: Editproduct, name:'edit-product' },
+       //Stock
+       
+       { path: '/stock', component: stock , name:'stock' },
+       { path: '/edit-stock/:id', component: Editstock, name:'edit-stock' },
        //Expenses
        { path: '/add-expense', component: Addexpense , name:'addexpense' },
        { path: '/all-expense', component: Allexpense , name:'allexpense' },

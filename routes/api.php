@@ -23,4 +23,6 @@ Route::apiResource('/all-category','Api\CategoryController');
 Route::apiResource('/all-customer','Api\CustomerController');
 Route::apiResource('/alluser', 'UserController');
 Route::apiResource('/all-product', 'Api\ProductController');
+Route::post('/stock-update/{id}', 'Api\ProductController@stockupdate');
 Route::apiResource('/all-expense', 'Api\ExpenseController');
+Route::get('/get-product-by-catid/{id}', 'Api\PosController@getallproductbycatid');

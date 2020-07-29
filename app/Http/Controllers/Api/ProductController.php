@@ -175,6 +175,15 @@ class ProductController extends Controller
       
             
     }
+    public function stockupdate(Request $request , $id){
+        $validation = $request->validate([
+            'product_quantity' => 'required',
+        ]);
+        $stockupdate = Product::find($id);
+        $stockupdate->product_quantity =$request->product_quantity;
+        $stockupdate->save();
+
+    }
 
     /**
      * Remove the specified resource from storage.

@@ -320,7 +320,7 @@ function template_functions(){
 	$('[data-rel="chosen"],[rel="chosen"]').chosen();
 
 	/* ---------- Tabs ---------- */
-	$('#myTab a:first').tab('show');
+	$('#myTab a:last').tab('show');
 	$('#myTab a').click(function (e) {
 	  e.preventDefault();
 	  $(this).tab('show');

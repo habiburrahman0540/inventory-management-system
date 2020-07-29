@@ -336,7 +336,7 @@
 				<div class="nav-collapse sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked main-menu">
 						<li><router-link to="/dashboard"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></router-link></li>	
-						
+						<li><router-link to="/pos"><i class="icon-bar-chart"></i><span class="hidden-tablet"> POS</span></router-link></li>	
 						<li>
 							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Employee</span></a>
 							<ul>
@@ -376,6 +376,9 @@
 								<li><router-link class="submenu" to="/all-product"><i class="icon-medkit"></i><span class="hidden-tablet"> All Product</span></router-link></li>
 								
 							</ul>	
+						</li>
+						<li>
+							<router-link class="dropmenu" to="/stock"><i class="icon-user-md"></i><span class="hidden-tablet"> Stock</span></router-link>
 						</li>
 						<li>
 							<a class="dropmenu" href="#"><i class="icon-user-md"></i><span class="hidden-tablet"> Expense</span></a>
