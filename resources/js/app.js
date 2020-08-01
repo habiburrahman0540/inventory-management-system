@@ -5,7 +5,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
-
+window.Reload = new Vue();
 import {routes} from './routes.js'
 import User from './Helpers/User'
 window.User = User;

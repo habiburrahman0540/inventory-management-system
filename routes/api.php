@@ -26,3 +26,9 @@ Route::apiResource('/all-product', 'Api\ProductController');
 Route::post('/stock-update/{id}', 'Api\ProductController@stockupdate');
 Route::apiResource('/all-expense', 'Api\ExpenseController');
 Route::get('/get-product-by-catid/{id}', 'Api\PosController@getallproductbycatid');
+Route::get('/addToCard/{id}', 'Api\CardController@addToCard');
+Route::get('/card/product', 'Api\CardController@productshowtocard');
+Route::get('/remove/cardItems/{id}', 'Api\CardController@removeitems');
+Route::get('/Cardproductincrement/{id}', 'Api\CardController@proincrement');
+Route::get('/Cardproductdecrement/{id}', 'Api\CardController@prodecrement');
+

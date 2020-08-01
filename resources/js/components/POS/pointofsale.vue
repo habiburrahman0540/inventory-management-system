@@ -29,40 +29,26 @@
 							  <thead>
 								  <tr>
 									  <th>Name</th>
-									  <th>Qtn</th>
+									  <th style="width:120px">Qtn</th>
 									  <th>Unit</th>
 									  <th>Total</th>                                          
 									  <th>Action</th>                                          
 								  </tr>
 							  </thead>   
 							  <tbody>
-								<tr>
-									<td>Yiorgos Avraamu</td>
-									<td class="center">2012/01/01</td>
-									<td class="center">Member</td>
-									<td class="center">Member</td>
+								<tr v-for="card in cards" :key="card.id">
+									<td>{{card.product_name}}</td>
+									<td class="center"><input type="text" readonly="" :value="card.product_quantity" style="width: 20px;height: 26px;margin-top: 5px;">
+									<button class="btn btn-sm btn-primary" @click.prevent="increment(card.id)">+</button>
+									<button class="btn btn-sm btn-danger" @click.prevent="decrement(card.id)">-</button>
+									</td>
+									<td class="center">{{card.product_price}}</td>
+									<td class="center">{{card.sub_total}}</td>
 									<td class="center">
-										<a href="" class="btn btn-sm btn-primary" >x</a>
+										<a @click="removecarditems(card.id)" class="btn btn-sm btn-primary" >x</a>
 									</td>                                       
 								</tr>
-							      <tr>
-									<td>Yiorgos Avraamu</td>
-									<td class="center">2012/01/01</td>
-									<td class="center">Member</td>
-									<td class="center">Member</td>
-									<td class="center">
-										<a href="" class="btn btn-sm btn-primary" >x</a>
-									</td>                                       
-								</tr>
-								<tr>
-									<td>Yiorgos Avraamu</td>
-									<td class="center">2012/01/01</td>
-									<td class="center">Member</td>
-									<td class="center">Member</td>
-									<td class="center">
-										<a href="" class="btn btn-sm btn-primary" >x</a>
-									</td>                                       
-								</tr>                           
+							                            
 							  </tbody>
 						 </table>
 							
@@ -127,7 +113,7 @@
 						<div class="control-group">
 								<label class="control-label" for="selectError3">Customer Name</label>
 								<div class="controls">
-								  <select id="selectError3" v-model="customer_id" >
+								  <select id="selectError3" >
 									
 									<option v-for="customer in customers" :key="customer.id">{{customer.name}}</option>
 									
@@ -192,7 +178,7 @@
 																<p>{{product.product_code}}</p>
 																<span class="badge badge-success" v-if="product.product_quantity >=1">available {{product.product_quantity}}</span>
 																<span class="badge badge-danger priority red" v-else="">Stock out </span>
-																<button class="btn btn-small btn-primary" style="margin-top:5px;margin-left:30px;">Buy Now</button>
+																<button class="btn btn-small btn-primary" style="margin-top:5px;margin-left:30px;" @click.prevent="addToCard(product.id)">Buy Now</button>
 																
 															</div>
 															</div>
@@ -220,7 +206,7 @@
 																<p>{{getproduct.product_code}}</p>
 																<span class="badge badge-success" v-if="getproduct.product_quantity >=1">available {{getproduct.product_quantity}}</span>
 																<span class="badge badge-danger priority red" v-else="">Stock out </span>
-																<p style="margin-top:5px;margin-left:30px;"><a href="#" class="btn btn-primary">Buy Now</a></p>
+																<p style="margin-top:5px;margin-left:30px;"><a href="#" class="btn btn-primary"  @click.prevent="addToCard(getproduct.id)">Buy Now</a></p>
 															</div>
 															</div>
 														</li>
@@ -258,6 +244,7 @@ export default {
 				Categories:'',
 				getproducts:[],
 				customers:[],
+				cards:[],
 				searchterm:''
 			}
 		},
@@ -278,6 +265,39 @@ export default {
 			},
 		},
 		methods:{
+			addToCard(id){
+					axios.get('/api/addToCard/'+id)
+					.then(()=>{
+						Reload.$emit('Afteradd');
+						noty({type:'success',layout:'topRight',text:'Product added successfully into card',timeout: 1000})
+					}).catch()
+			},
+			increment(id){
+				axios.get('/api/Cardproductincrement/'+id)
+					.then(()=>{
+						Reload.$emit('Afteradd');
+						noty({type:'success',layout:'topRight',text:'Product added successfully into card',timeout: 1000})
+					}).catch()
+			},
+				decrement(id){
+				axios.get('/api/Cardproductdecrement/'+id)
+					.then(()=>{
+						Reload.$emit('Afteradd');
+						noty({type:'success',layout:'topRight',text:'Product unit removed successfully from card',timeout: 1000})
+					}).catch()
+			},
+			removecarditems(id){
+					axios.get('/api/remove/cardItems/'+id)
+					.then(()=>{
+						Reload.$emit('Afteradd');
+						noty({type:'success',layout:'topRight',text:'Product item remove successfully.',timeout: 1000})
+					}).catch()
+			},
+			cardproduct(){
+				axios.get('/api/card/product')
+				.then(({data})=>(this.cards = data)).catch()
+			},
+			
 			allproduct(){
 				axios.get('/api/all-product')
 				.then(({data})=>(this.products=data))
@@ -304,6 +324,12 @@ export default {
 			this.allproduct()
 			this.allcategory()
 			this.allcustomer()
+			this.cardproduct()
+			Reload.$on('Afteradd',()=>{
+				this.cardproduct()
+			})
+
+			
 		}
 }
 
