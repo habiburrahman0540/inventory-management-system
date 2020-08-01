@@ -3982,6 +3982,24 @@ __webpack_require__.r(__webpack_exports__);
       return this.getproducts.filter(function (getproduct) {
         return getproduct.product_name.match(_this2.searchterm) || getproduct.product_code.match(_this2.searchterm);
       });
+    },
+    totalquantity: function totalquantity() {
+      var sum = 0;
+
+      for (var i = 0; i < this.cards.length; i++) {
+        sum += parseFloat(this.cards[i].product_quantity);
+      }
+
+      return sum;
+    },
+    subtotal: function subtotal() {
+      var sum = 0;
+
+      for (var i = 0; i < this.cards.length; i++) {
+        sum += parseFloat(this.cards[i].product_quantity) * parseFloat(this.cards[i].product_price);
+      }
+
+      return sum;
     }
   },
   methods: {
@@ -52793,19 +52811,21 @@ var render = function() {
                       [_vm._v("+")]
                     ),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-sm btn-danger",
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.decrement(card.id)
-                          }
-                        }
-                      },
-                      [_vm._v("-")]
-                    )
+                    card.product_quantity >= 2
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-sm btn-danger",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.decrement(card.id)
+                              }
+                            }
+                          },
+                          [_vm._v("-")]
+                        )
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "center" }, [
@@ -52837,7 +52857,67 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(3),
+        _c("div", { staticClass: "box-content" }, [
+          _c("table", { staticClass: "table table-bordered table-striped" }, [
+            _c("tbody", [
+              _c("tr", [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "center" } }, [
+                  _c("strong", [
+                    _vm._v(
+                      "\n\t\t\t\t                      " +
+                        _vm._s(_vm.totalquantity) +
+                        "\n\t\t\t\t                    "
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _vm._m(4),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "center" } }, [
+                  _c("strong", [
+                    _vm._v(
+                      "\n\t\t\t\t                      " +
+                        _vm._s(_vm.subtotal) +
+                        "\n\t\t\t\t                    "
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _vm._m(5),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "center" } }, [
+                  _c("strong", [
+                    _vm._v(
+                      "\n\t\t\t\t                       " +
+                        _vm._s((_vm.subtotal * 5) / 100) +
+                        "\n\t\t\t\t                    "
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _vm._m(6),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "center" } }, [
+                  _c("strong", [
+                    _vm._v(
+                      "\n\t\t\t\t                       " +
+                        _vm._s((_vm.subtotal * 5) / 100 + _vm.subtotal) +
+                        "\n\t\t\t\t                    "
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "box-content" }, [
           _c(
@@ -52876,11 +52956,11 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(4),
+                _vm._m(7),
                 _vm._v(" "),
-                _vm._m(5),
+                _vm._m(8),
                 _vm._v(" "),
-                _vm._m(6)
+                _vm._m(9)
               ])
             ]
           )
@@ -52912,7 +52992,7 @@ var render = function() {
                 ])
               }),
               _vm._v(" "),
-              _vm._m(7)
+              _vm._m(10)
             ],
             2
           ),
@@ -53228,76 +53308,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-content" }, [
-      _c("table", { staticClass: "table table-bordered table-striped" }, [
-        _c("tbody", [
-          _c("tr", [
-            _c("td", { staticStyle: { "text-align": "center" } }, [
-              _c("strong", [
-                _vm._v(
-                  "\n\t\t\t\t\t\t\t\t\t\tTotal Quantity\n\t\t\t\t\t\t\t\t\t"
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("td", { staticStyle: { "text-align": "center" } }, [
-              _c("strong", [
-                _vm._v(
-                  "\n\t\t\t\t                       50\n\t\t\t\t                    "
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", { staticStyle: { "text-align": "center" } }, [
-              _c("strong", [
-                _vm._v("\n\t\t\t\t\t\t\t\t\t\tSub\ttotal\n\t\t\t\t\t\t\t\t\t")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("td", { staticStyle: { "text-align": "center" } }, [
-              _c("strong", [
-                _vm._v(
-                  "\n\t\t\t\t                       50\n\t\t\t\t                    "
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", { staticStyle: { "text-align": "center" } }, [
-              _c("strong", [
-                _vm._v("\n\t\t\t\t\t\t\t\t\t\tVAT\n\t\t\t\t\t\t\t\t\t")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("td", { staticStyle: { "text-align": "center" } }, [
-              _c("strong", [
-                _vm._v(
-                  "\n\t\t\t\t                       50\n\t\t\t\t                    "
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", { staticStyle: { "text-align": "center" } }, [
-              _c("strong", [
-                _vm._v("\n\t\t\t\t\t\t\t\t\t\tTotal\n\t\t\t\t\t\t\t\t\t")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("td", { staticStyle: { "text-align": "center" } }, [
-              _c("strong", [
-                _vm._v(
-                  "\n\t\t\t\t                       50\n\t\t\t\t                    "
-                )
-              ])
-            ])
-          ])
-        ])
+    return _c("td", { staticStyle: { "text-align": "center" } }, [
+      _c("strong", [
+        _vm._v("\n\t\t\t\t\t\t\t\t\t\tTotal Quantity\n\t\t\t\t\t\t\t\t\t")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticStyle: { "text-align": "center" } }, [
+      _c("strong", [
+        _vm._v("\n\t\t\t\t\t\t\t\t\t\tSub\ttotal\n\t\t\t\t\t\t\t\t\t")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticStyle: { "text-align": "center" } }, [
+      _c("strong", [_vm._v("\n\t\t\t\t\t\t\t\t\t\tVAT\n\t\t\t\t\t\t\t\t\t")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticStyle: { "text-align": "center" } }, [
+      _c("strong", [_vm._v("\n\t\t\t\t\t\t\t\t\t\tTotal\n\t\t\t\t\t\t\t\t\t")])
     ])
   },
   function() {

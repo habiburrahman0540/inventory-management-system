@@ -40,7 +40,7 @@
 									<td>{{card.product_name}}</td>
 									<td class="center"><input type="text" readonly="" :value="card.product_quantity" style="width: 20px;height: 26px;margin-top: 5px;">
 									<button class="btn btn-sm btn-primary" @click.prevent="increment(card.id)">+</button>
-									<button class="btn btn-sm btn-danger" @click.prevent="decrement(card.id)">-</button>
+									<button class="btn btn-sm btn-danger" @click.prevent="decrement(card.id)" v-if="card.product_quantity >= 2">-</button>
 									</td>
 									<td class="center">{{card.product_price}}</td>
 									<td class="center">{{card.sub_total}}</td>
@@ -64,7 +64,7 @@
 									</td>
 								<td style="text-align:center">
 									<strong>
-				                       50
+				                      {{totalquantity}}
 				                    </strong>
 								</td>
 							</tr>
@@ -76,7 +76,7 @@
 								</td>
 								<td style="text-align:center">
 									<strong>
-				                       50
+				                      {{subtotal}}
 				                    </strong>
 								</td>
 							</tr>
@@ -87,7 +87,7 @@
 									</strong>	</td>
 								<td style="text-align:center">
 									<strong >
-				                       50
+				                       {{subtotal*5/100}}
 				                    </strong>
 								</td>
 							</tr>
@@ -99,7 +99,7 @@
 									</td>
 									<td style="text-align:center">
 									<strong>
-				                       50
+				                       {{subtotal*5/100+subtotal}}
 				                    </strong>
 								</td>
 							</tr>
@@ -262,6 +262,28 @@ export default {
 					|| getproduct.product_code.match(this.searchterm)
 					
 				})
+			},
+			totalquantity(){
+				let sum = 0;
+				for(let i =0; i < this.cards.length; i++)
+				{
+					sum+= (parseFloat(this.cards[i].product_quantity));
+					
+
+				}
+				return sum;
+				
+			},
+			subtotal(){
+				let sum = 0;
+				for(let i =0; i < this.cards.length; i++)
+				{
+					sum+= (parseFloat(this.cards[i].product_quantity))*(parseFloat(this.cards[i].product_price));
+					
+
+				}
+				return sum;
+				
 			},
 		},
 		methods:{
