@@ -54,7 +54,7 @@
 					<span class="icon-bar"></span>
 				</a>
 				<a class="brand" href="https://www.fiverr.com/users/mdhabib058/manage_gigs" target="_blank" style="color: #FFFFFF;font-weight:bold"><span>Inventory Management System</span></a>
-								
+						
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
@@ -396,6 +396,14 @@
 								
 							</ul>	
 						</li>
+						<li>
+							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet">Extra</span></a>
+							<ul>
+								
+								<li><router-link class="submenu" to="/all-extra"><i class="icon-medkit"></i><span class="hidden-tablet">Vat and Site Information</span></router-link></li>
+								
+							</ul>	
+						</li>
 						<li><router-link to="/logout"><i class="icon-off"></i><span class="hidden-tablet"> Logout</span></router-link></li>
 					</ul>
 				</div>
@@ -435,11 +443,14 @@
 	<div class="clearfix"></div>
 	
 	<footer id="footer" style="display: none;" v-show="$route.path === '/' || $route.path === 'forgetpassword' ? false : true">
-
+@php
+use App\Model\Information;
+$info = Information::all();
+@endphp
 		<p>
-			<span style="text-align:left;float:left;font-weight:bold">&copy; 2020 <a href="https://www.fiverr.com/users/mdhabib058/manage_gigs" target="_blank" alt="Inventory Management System Themes" style="color: #FFFFFF;font-weight:bold">- Inventory Management System</a></span>
+			<span style="text-align:left;float:left;font-weight:bold">&copy;{{ $info[0]->year}} <a href="https://www.fiverr.com/users/mdhabib058/manage_gigs" target="_blank" alt="Inventory Management System Themes" style="color: #FFFFFF;font-weight:bold">- {{ $info[0]->name}}</a> || Email :{{ $info[0]->email}}</span>
 			<span class="hidden-phone" style="text-align:right;float:right;font-weight:bold">Developed by : <a href="https://www.fiverr.com/users/mdhabib058/manage_gigs" target="_blank" alt="Inventory Management System Templates" style="color: #FFFFFF;font-weight:bold">Dev-Habib</a></span>
-		</p>
+		</@php>
 
 	</footer>
 	

@@ -17,6 +17,10 @@ let POS = require('./components/POS/pointofsale.vue').default;
  let Addcustomer = require('./components/Customer/create.vue').default;
  let Allcustomer = require('./components/Customer/index.vue').default;
  let Editcustomer = require('./components/Customer/edit.vue').default;
+ //Extra
+ let Addextra = require('./components/Extra/create.vue').default;
+ let Allextra = require('./components/Extra/index.vue').default;
+ let Editextra = require('./components/Extra/edit.vue').default;
  //Category
  let Addcategory = require('./components/Category/create.vue').default;
  let Allcategory = require('./components/Category/index.vue').default;
@@ -54,6 +58,10 @@ export const routes = [
      { path: '/add-customer', component: Addcustomer , name:'addcustomer' },
      { path: '/all-customer', component: Allcustomer , name:'allcustomer' },
      { path: '/edit-customer/:id', component: Editcustomer , name:'edit-customer' },
+     //Extra
+     { path: '/add-extra', component: Addextra , name:'addextra' },
+     { path: '/all-extra', component: Allextra , name:'allextra' },
+     { path: '/edit-extra/:id', component: Editextra , name:'edit-extra' },
       //Category
       { path: '/add-category', component: Addcategory , name:'addcategory' },
       { path: '/all-category', component: Allcategory , name:'allcategory' },

@@ -83,11 +83,11 @@
 							<tr>
 								<td style="text-align:center">
 									<strong>
-										VAT
+										Vat
 									</strong>	</td>
 								<td style="text-align:center">
 									<strong >
-				                       {{subtotal*5/100}}
+				                       {{vats.vat}} %
 				                    </strong>
 								</td>
 							</tr>
@@ -99,23 +99,34 @@
 									</td>
 									<td style="text-align:center">
 									<strong>
-				                       {{subtotal*5/100+subtotal}}
+				                       {{subtotal*vats.vat/100+subtotal}}
 				                    </strong>
 								</td>
 							</tr>
-							
+							<tr>
+								<td style="text-align:center">
+									<strong>
+										Due amount
+									</strong>
+									</td>
+									<td style="text-align:center">
+									<strong>
+				                        {{dueamount}}
+				                    </strong>
+								</td>
+							</tr>
 						</tbody></table>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal" @submit.prevent="">
+						<form class="form-horizontal" @submit.prevent="orderdone">
 						  <fieldset>						
                            
 						<div class="control-group">
 								<label class="control-label" for="selectError3">Customer Name</label>
 								<div class="controls">
-								  <select id="selectError3" >
+								  <select id="selectError3" v-model="customer_id" >
 									
-									<option v-for="customer in customers" :key="customer.id">{{customer.name}}</option>
+									<option :value="customer.id" v-for="customer in customers" :key="customer.id">{{customer.name}}</option>
 									
 								  </select>
 								  
@@ -127,14 +138,21 @@
 								<div class="control-group">
 							  <label class="control-label" for="typeahead">Pay Now :</label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead" >
+								<input type="text" class="span6 typeahead" v-model="pay">
 								
 							  </div>
 							</div>
-                           <div class="control-group">
-							  <label class="control-label" for="typeahead">Due amount :</label>
+							    
+								<div class="control-group">
+							  <label class="control-label" for="typeahead">Pay by :</label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead" >
+									  <select id="selectError3" v-model="payby" >
+									
+									<option value="Handcash">Hand Cash</option>
+									<option value="Cheque">Cheque</option>
+									<option value="Giftcard">Gift card</option>
+									
+								  </select>
 								
 							  </div>
 							</div>
@@ -177,8 +195,8 @@
 																<h6>{{product.product_name}}</h6>
 																<p>{{product.product_code}}</p>
 																<span class="badge badge-success" v-if="product.product_quantity >=1">available {{product.product_quantity}}</span>
-																<span class="badge badge-danger priority red" v-else="">Stock out </span>
-																<button class="btn btn-small btn-primary" style="margin-top:5px;margin-left:30px;" @click.prevent="addToCard(product.id)">Buy Now</button>
+																<span class="badge badge-danger priority red" v-else>Stock out </span>
+																<button class="btn btn-small btn-primary" style="margin-top:5px;margin-left:30px;" @click.prevent="addToCard(product.id)" v-if="product.product_quantity > 0">Buy Now</button>
 																
 															</div>
 															</div>
@@ -205,8 +223,8 @@
 																<h6>{{getproduct.product_name}}</h6>
 																<p>{{getproduct.product_code}}</p>
 																<span class="badge badge-success" v-if="getproduct.product_quantity >=1">available {{getproduct.product_quantity}}</span>
-																<span class="badge badge-danger priority red" v-else="">Stock out </span>
-																<p style="margin-top:5px;margin-left:30px;"><a href="#" class="btn btn-primary"  @click.prevent="addToCard(getproduct.id)">Buy Now</a></p>
+																<span class="badge badge-danger priority red" v-else>Stock out </span>
+																<p style="margin-top:5px;margin-left:30px;"><a href="#" class="btn btn-primary"  @click.prevent="addToCard(getproduct.id)" v-if="getproduct.product_quantity > 0">Buy Now</a></p>
 															</div>
 															</div>
 														</li>
@@ -240,7 +258,11 @@ export default {
 		},
 		data(){
 			return{
+				customer_id:'',
+				pay:'',
+				payby:'',
 				products:[],
+				vats:[],
 				Categories:'',
 				getproducts:[],
 				customers:[],
@@ -274,6 +296,14 @@ export default {
 				return sum;
 				
 			},
+			dueamount(){
+				let total = this.subtotal* this.vats.vat/100+this.subtotal;
+				let pay = this.pay;
+				let due = total - pay;
+				let dueafter = due.toFixed(2);
+				return dueafter;
+				
+			},
 			subtotal(){
 				let sum = 0;
 				for(let i =0; i < this.cards.length; i++)
@@ -287,6 +317,21 @@ export default {
 			},
 		},
 		methods:{
+			orderdone(){
+				let total = this.subtotal* this.vats.vat/100+this.subtotal;
+				let vat =this.vats.vat;
+				let data ={qty:this.totalquantity,subtotal:this.subtotal,customer_id :this.customer_id,pay:this.pay,
+				due:this.dueamount,payby:this.payby,vat:vat,total:total
+				}
+				axios.post('api/orderdone',data)
+				.then(()=>{
+					noty({type:'success',layout:'topRight',text:'order done successfully ',timeout: 1000})
+				this.$router.push({name:'dashboard'})
+				}
+					
+					
+				).catch()
+			},
 			addToCard(id){
 					axios.get('/api/addToCard/'+id)
 					.then(()=>{
@@ -314,6 +359,11 @@ export default {
 						Reload.$emit('Afteradd');
 						noty({type:'success',layout:'topRight',text:'Product item remove successfully.',timeout: 1000})
 					}).catch()
+			},
+			vat(){
+				axios.get('/api/vat')
+				.then(({data})=>(this.vats = data))
+				.catch()
 			},
 			cardproduct(){
 				axios.get('/api/card/product')
@@ -343,12 +393,15 @@ export default {
 			
 		},
 		created(){
-			this.allproduct()
-			this.allcategory()
-			this.allcustomer()
-			this.cardproduct()
+			this.vat();
+			this.allproduct();
+			this.allcategory();
+			this.allcustomer();
+			this.cardproduct();
+			
 			Reload.$on('Afteradd',()=>{
 				this.cardproduct()
+				this.dueamount()
 			})
 
 			

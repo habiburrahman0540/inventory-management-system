@@ -21,6 +21,8 @@ Route::apiResource('/all-employee','Api\EmployeeController');
 Route::apiResource('/all-supplier','Api\SupplierController');
 Route::apiResource('/all-category','Api\CategoryController');
 Route::apiResource('/all-customer','Api\CustomerController');
+Route::apiResource('/all-extra-information','Api\InformationController');
+Route::get('/vat','Api\InformationController@vat');
 Route::apiResource('/alluser', 'UserController');
 Route::apiResource('/all-product', 'Api\ProductController');
 Route::post('/stock-update/{id}', 'Api\ProductController@stockupdate');
@@ -32,3 +34,4 @@ Route::get('/remove/cardItems/{id}', 'Api\CardController@removeitems');
 Route::get('/Cardproductincrement/{id}', 'Api\CardController@proincrement');
 Route::get('/Cardproductdecrement/{id}', 'Api\CardController@prodecrement');
 
+Route::post('/orderdone', 'Api\PosController@orderdone');
