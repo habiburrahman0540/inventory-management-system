@@ -19,6 +19,10 @@ class InformationController extends Controller
         return response()->json( $info);
        
     }
+    public function allinformation(){
+        $info = Information::first();
+        return response()->json( $info);
+    }
     public function vat()
     {
         $info = Information::first();

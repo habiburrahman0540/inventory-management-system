@@ -148,9 +148,10 @@
 							  <div class="controls">
 									  <select id="selectError3" v-model="payby" >
 									
-									<option value="Handcash">Hand Cash</option>
+									<option value="Hand cash">Hand Cash</option>
 									<option value="Cheque">Cheque</option>
-									<option value="Giftcard">Gift card</option>
+									<option value="Gift card">Gift card</option>
+									<option value="Cash Not Paid">Cash Not Paid</option>
 									
 								  </select>
 								

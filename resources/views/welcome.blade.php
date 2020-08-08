@@ -370,6 +370,16 @@
 							</ul>	
 						</li>
 						<li>
+							<a class="dropmenu" href="#"><i class="icon-user-md"></i><span class="hidden-tablet"> Reports</span></a>
+							<ul>
+								<li><router-link class="submenu" to="/today-sales-report"><i class="icon-plus-sign"></i><span class="hidden-tablet">Today Sales Report</span></router-link></li>
+								<li><router-link class="submenu" to="/monthly-sales-report"><i class="icon-medkit"></i><span class="hidden-tablet"> Monthly Sales Report</span></router-link></li>
+								<li><router-link class="submenu" to="/yearly-sales-report"><i class="icon-medkit"></i><span class="hidden-tablet"> Yearly Sales Report</span></router-link></li>
+								<li><router-link class="submenu" to="/total-due"><i class="icon-medkit"></i><span class="hidden-tablet"> Total Due Report</span></router-link></li>
+								
+							</ul>	
+						</li>
+						<li>
 							<a class="dropmenu" href="#"><i class="icon-user-md"></i><span class="hidden-tablet"> Products</span></a>
 							<ul>
 								<li><router-link class="submenu" to="/add-product"><i class="icon-plus-sign"></i><span class="hidden-tablet"> Add Product</span></router-link></li>

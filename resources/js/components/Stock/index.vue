@@ -67,7 +67,7 @@
 								<td class="center ">{{product.buying_price}}</td>
 
 								<td class="center " v-if="product.product_quantity >=1"><span class="badge badge-success">Available</span></td>
-								<td class="center " v-else=""><span class="badge badge-danger priority red">Stock out</span></td>
+								<td class="center " v-else>Stock out</span></td>
 
 								<td class="center ">{{product.product_quantity}}</td>
 								<td class="center ">

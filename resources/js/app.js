@@ -3,7 +3,10 @@ require('./bootstrap');
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import jsPDF from 'jspdf';
+window.jsPDF = jsPDF;
+import autoTable from 'jspdf-autotable'
+window.autoTable =autoTable;
 Vue.use(VueRouter)
 window.Reload = new Vue();
 import {routes} from './routes.js'

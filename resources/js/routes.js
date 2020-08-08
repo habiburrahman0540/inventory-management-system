@@ -32,6 +32,12 @@ let POS = require('./components/POS/pointofsale.vue').default;
  //stock
  let stock = require('./components/Stock/index.vue').default;
  let Editstock = require('./components/Stock/edit.vue').default;
+ //Reports
+ let Todaysales = require('./components/Reports/todaysales.vue').default;
+ let Monthlysales = require('./components/Reports/monthlysales.vue').default;
+ let Yearlysales = require('./components/Reports/yearlysales.vue').default;
+ let TotalDue = require('./components/Reports/due.vue').default;
+ let Invoice = require('./components/Reports/invoice.vue').default;
  //Expense
  let Addexpense = require('./components/Expense/create.vue').default;
  let Allexpense = require('./components/Expense/index.vue').default;
@@ -70,10 +76,17 @@ export const routes = [
        { path: '/add-product', component: Addproduct , name:'addproduct' },
        { path: '/all-product', component: Allproduct , name:'allproduct' },
        { path: '/edit-product/:id', component: Editproduct, name:'edit-product' },
-       //Stock
        
+       //Stock
        { path: '/stock', component: stock , name:'stock' },
        { path: '/edit-stock/:id', component: Editstock, name:'edit-stock' },
+       //Reports
+       { path: '/today-sales-report', component: Todaysales , name:'todaysales' },
+       { path: '/monthly-sales-report', component: Monthlysales , name:'monthlysales' },
+       { path: '/yearly-sales-report', component: Yearlysales , name:'yearlysales' },
+       { path: '/total-due', component: TotalDue , name:'totaldue' },
+       { path: '/invoice/:id', component: Invoice , name:'invoice' },
+      
        //Expenses
        { path: '/add-expense', component: Addexpense , name:'addexpense' },
        { path: '/all-expense', component: Allexpense , name:'allexpense' },
